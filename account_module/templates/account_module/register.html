@@ -137,40 +137,73 @@
       <h2 data-fa="بیا حساب بسازیم" data-en="Let's create your account">بیا حساب بسازیم</h2>
       <p class="sub" data-fa="اطلاعات پایه رو وارد کن. مرحله بعد، مقطع تحصیلی و برنامه روزانه‌ات رو با هم می‌چینیم." data-en="Enter your basic info. Next, we'll set your grade level and daily plan together.">اطلاعات پایه رو وارد کن. مرحله بعد، مقطع تحصیلی و برنامه روزانه‌ات رو با هم می‌چینیم.</p>
 
-      <form id="signupForm" novalidate>
-        <div class="field">
-          <label for="fullname" data-fa="نام و نام‌خانوادگی" data-en="Full name">نام و نام‌خانوادگی</label>
-          <input id="fullname" name="fullname" type="text" placeholder="مثلاً سارا احمدی" data-fa-ph="مثلاً سارا احمدی" data-en-ph="e.g. Sara Ahmadi" required autocomplete="name">
-        </div>
+      <form id="signupForm" novalidate method="post" action='{% url 'register_page' %}'>
+          {% csrf_token %}
 
         <div class="field">
-          <label for="email" data-fa="ایمیل" data-en="Email">ایمیل</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+          <label for="{{ register_form.fullname.id_for_label }}" data-fa="نام و نام‌خانوادگی" data-en="Full name">نام و نام‌خانوادگی</label>
+          <input id="{{ register_form.fullname.id_for_label }}" name="{{ register_form.fullname.html_name }}"
+                 type="text" value="{{ register_form.fullname.value|default:'' }}" placeholder="مثلاً سارا احمدی" data-fa-ph="مثلاً سارا احمدی" data-en-ph="e.g. Sara Ahmadi"
+                 required autocomplete="name">
+           {% for error in register_form.fullname.errors %}
+               <p class="error-text">{{ error }}</p>
+           {% endfor %}
         </div>
-
+       <div class="field">
+          <label for="{{ register_form.username.id_for_label }}" data-fa="نام کاربری" data-en="username">نام کاربری</label>
+          <input id="{{ register_form.username.id_for_label }}" name="{{ register_form.username.html_name }}"
+                 type="text" value="{{ register_form.username.value|default:'' }}" placeholder="مثلاً user1234" data-fa-ph="مثلاً user1234" data-en-ph="e.g. user1234"
+                 required autocomplete="name">
+           {% for error in register_form.username.errors %}
+               <p class="error-text">{{ error }}</p>
+           {% endfor %}
+        </div>
         <div class="field">
-          <label for="password" data-fa="رمز عبور" data-en="Password">رمز عبور</label>
+          <label for="{{ register_form.email.id_for_label }}" data-fa="ایمیل" data-en="Email">ایمیل</label>
+          <input id="{{ register_form.email.id_for_label }}" name="{{ register_form.email.html_name }}"
+                 value="{{ register_form.email.value|default:'' }}" type="email" placeholder="you@example.com"
+                 required autocomplete="email">
+              {% for error in register_form.email.errors %}
+               <p class="error-text">{{ error }}</p>
+              {% endfor %}
+        </div>
+        <div class="field">
+          <label for="{{ register_form.password.id_for_label }}" data-fa="رمز عبور" data-en="Password">رمز عبور</label>
           <div class="pw-wrap">
-            <input id="password" name="password" type="password" placeholder="حداقل ۸ کاراکتر" data-fa-ph="حداقل ۸ کاراکتر" data-en-ph="At least 8 characters" minlength="8" required autocomplete="new-password">
+            <input id="{{ register_form.password.id_for_label }}" name="{{ register_form.password.html_name }}"
+                   type="password" value="{{ register_form.password.value|default:'' }}" placeholder="حداقل ۸ کاراکتر"
+                   data-fa-ph="حداقل ۸ کاراکتر" data-en-ph="At least 8 characters" minlength="8" required autocomplete="new-password">
             <button type="button" class="pw-toggle" id="pwToggle" aria-label="نمایش رمز عبور">
               <svg id="pwIconShow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"></circle></svg>
               <svg id="pwIconHide" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M9.88 5.15A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a13.7 13.7 0 0 1-2.9 3.66M6.1 6.1C3.87 7.65 2 10 2 12s3.5 7 10 7a10.9 10.9 0 0 0 3.1-.45" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             </button>
+              {% for error in register_form.password.errors %}
+               <p class="error-text">{{ error }}</p>
+              {% endfor %}
           </div>
         </div>
-
         <div class="field">
-          <label for="mobile" data-fa="شماره موبایل" data-en="Mobile number">شماره موبایل</label>
-          <input id="mobile" name="mobile" type="tel" placeholder="۰۹۱۲۳۴۵۶۷۸۹" data-fa-ph="۰۹۱۲۳۴۵۶۷۸۹" data-en-ph="09123456789" pattern="0[0-9]{10}" required autocomplete="tel">
+          <label for="{{ register_form.phone_number.id_for_label }}" data-fa="شماره موبایل" data-en="Mobile number">شماره موبایل</label>
+          <input id="{{ register_form.phone_number.id_for_label }}" name="{{ register_form.phone_number.html_name }}"
+                 type="tel" value="{{ register_form.phone_number.value|default:'' }}" placeholder="۰۹۱۲۳۴۵۶۷۸۹"
+                 data-fa-ph="۰۹۱۲۳۴۵۶۷۸۹" data-en-ph="09123456789" pattern="0[0-9]{10}" required autocomplete="tel">
+            {% for error in register_form.phone_number.errors %}
+               <p class="error-text">{{ error }}</p>
+              {% endfor %}
         </div>
 
         <div class="field parent">
-          <label for="parentEmail" data-fa="ایمیل والدین" data-en="Parent's email">ایمیل والدین</label>
-          <input id="parentEmail" name="parentEmail" type="email" placeholder="parent@example.com" required>
-          <div class="hint" data-fa="گزارش پیشرفت هر شب و یادآوری‌های گزارش‌کار به این ایمیل ارسال می‌شود." data-en="Nightly progress reports and report reminders are sent to this email.">گزارش پیشرفت هر شب و یادآوری‌های گزارش‌کار به این ایمیل ارسال می‌شود.</div>
+          <label for="{{ register_form.parent_email.id_for_label }}" data-fa="ایمیل والدین" data-en="Parent's email">ایمیل والدین</label>
+          <input id="{{ register_form.parent_email.id_for_label }}" name="{{ register_form.parent_email.html_name }}"
+                 type="email" value="{{ register_form.parent_email.value|default:'' }}" placeholder="parent@example.com" required>
+          <div class="hint" data-fa="گزارش پیشرفت هر شب و یادآوری‌های گزارش‌کار به این ایمیل ارسال می‌شود."
+               data-en="Nightly progress reports and report reminders are sent to this email.">گزارش پیشرفت هر شب و یادآوری‌های گزارش‌کار به این ایمیل ارسال می‌شود.</div>
+               {% for error in register_form.parent_email.errors %}
+                   <p class="error-text">{{ error }}</p>
+               {% endfor %}
         </div>
 
-        <button type="submit" class="submit">
+        <button type="submit" class="submit" >
           <span data-fa="ثبت‌نام و ساخت برنامه" data-en="Sign up and build my plan">ثبت‌نام و ساخت برنامه</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </button>
@@ -180,7 +213,7 @@
 
       <div class="social-row">
         <button type="button" class="social-btn" id="googleBtn">
-          <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.87 2.7-6.62z"></path><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.98v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17.28-1.7V4.97H.98A9 9 0 0 0 0 9c0 1.45.35 2.83.98 4.03l2.97-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .98 4.97l2.97 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.87 2.7-6.62z"></path><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.98v2.33A9 9 0 0 0 9 18z"></path><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17.28-1.7V4.97H.98A9 9 0 0 0 0 9c0 1.45.35 2.83.98 4.03l2.97-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .98 4.97l2.97 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>
           <span data-fa="ورود با گوگل" data-en="Google">ورود با گوگل</span>
         </button>
         <button type="button" class="social-btn" id="facebookBtn">

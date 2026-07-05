@@ -30,14 +30,6 @@ const items = document.querySelectorAll('.plan-card .item');
     xpFill.style.width = '68%';
   }
 
-  document.getElementById('signupForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    if(this.checkValidity()){
-      alert(currentLang === 'fa' ? 'بعدی: انتخاب مقطع تحصیلی و تنظیم برنامه روزانه' : 'Next: choose your grade level and set up your daily plan');
-    } else {
-      this.reportValidity();
-    }
-  });
 
   document.getElementById('googleBtn').addEventListener('click', () => alert('اتصال به گوگل بعداً وصل می‌شود.'));
   document.getElementById('facebookBtn').addEventListener('click', () => alert('اتصال به فیسبوک بعداً وصل می‌شود.'));

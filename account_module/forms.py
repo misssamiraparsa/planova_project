@@ -2,15 +2,21 @@ from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import RegexValidator, MinLengthValidator, EmailValidator, MaxLengthValidator
 
-from planova_project.account_module.models import CustomUser
+from .models import CustomUser
 
 
 class RegisterForm(forms.Form):
     fullname = forms.CharField(
-        label='نام و نام خانوادگی'
+        label='نام و نام خانوادگی',
+        error_messages={
+            "required": "نام و نام خانوادگی الزامی است",
+        }
     )
     username = forms.CharField(
         label='نام کاربری کاربر',
+        error_messages={
+            "required": "نام کاربری الزامی است",
+        },
         initial='user1234',
         validators=[
             RegexValidator(r'^[a-zA-Z0-9]+$', 'فقط حروف و عدد'),
@@ -19,11 +25,17 @@ class RegisterForm(forms.Form):
     )
     email = forms.EmailField(
         label='ایمیل کاربر',
+        error_messages={
+            "required": "ایمیل الزامی است",
+        },
         widget=forms.EmailInput(),
     )
     password = forms.CharField(
         label='رمز عبور',
         widget=forms.PasswordInput(),
+        error_messages={
+            "required": "رمز عبور الزامی است",
+        },
         validators=[
             MinLengthValidator(8),
 
@@ -31,12 +43,18 @@ class RegisterForm(forms.Form):
     )
     phone_number = forms.CharField(
         label='تلفن همراه',
+        error_messages={
+            "required": "تلفن همراه الزامی است",
+        },
         validators=[
             RegexValidator(r'^0\d{10}$', 'شماره موبایل معتبر نیست (مثل ۰۹۱۲۳۴۵۶۷۸۹)')
         ]
     )
     parent_email = forms.EmailField(
         label='ایمیل والد',
+        error_messages={
+            "required": "ایمیل والد الزامی است",
+        },
         widget=forms.EmailInput(),
     )
 
