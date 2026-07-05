@@ -347,6 +347,18 @@
   }
   .field input:invalid:not(:placeholder-shown){ border-color:#FF6B6B; }
 
+  .pw-wrap{ position:relative; display:flex; align-items:center; }
+  .pw-wrap input{ width:100%; padding-inline-end:40px; }
+  .pw-toggle{
+    position:absolute; inset-inline-end:6px;
+    background:none; border:none; cursor:pointer;
+    color:var(--mist); padding:6px;
+    display:flex; align-items:center; justify-content:center;
+    transition:color .15s ease;
+  }
+  .pw-toggle:hover{ color:var(--ice); }
+  .pw-toggle:focus-visible{ outline:2px solid var(--pink-400); outline-offset:2px; border-radius:6px; }
+
   .field.parent{
     background:linear-gradient(180deg, rgba(216,31,114,0.08), rgba(216,31,114,0.03));
     border:1px solid rgba(221,59,132,0.28);

@@ -42,6 +42,18 @@ const items = document.querySelectorAll('.plan-card .item');
   document.getElementById('googleBtn').addEventListener('click', () => alert('اتصال به گوگل بعداً وصل می‌شود.'));
   document.getElementById('facebookBtn').addEventListener('click', () => alert('اتصال به فیسبوک بعداً وصل می‌شود.'));
 
+  // ---- password show/hide ----
+  document.getElementById('pwToggle').addEventListener('click', function(){
+    const pw = document.getElementById('password');
+    const show = document.getElementById('pwIconShow');
+    const hide = document.getElementById('pwIconHide');
+    const isHidden = pw.type === 'password';
+    pw.type = isHidden ? 'text' : 'password';
+    show.style.display = isHidden ? 'none' : 'block';
+    hide.style.display = isHidden ? 'block' : 'none';
+    this.setAttribute('aria-label', isHidden ? 'پنهان کردن رمز عبور' : 'نمایش رمز عبور');
+  });
+
   // ---- language switch ----
   let currentLang = 'fa';
   function applyLang(lang){

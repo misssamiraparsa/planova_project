@@ -4,4 +4,4 @@ from django.views.generic import ListView
 
 
 def register(request):
-    return render(request,'account_module/index.html')
+    return render(request, 'account_module/register.html')
