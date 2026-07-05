@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from django.views import View
+from django.views.generic import ListView
 
-# Create your views here.
+
+def register(request):
+    return render(request,'account_module/index.html')
