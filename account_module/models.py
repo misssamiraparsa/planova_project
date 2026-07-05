@@ -1,3 +1,12 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
+
+class CustomUser(AbstractUser):
+    fullname = models.CharField(verbose_name='نام و نام خانوادگی',null=True,blank=True)
+    email = models.EmailField(unique=True, verbose_name='ایمیل کاربر')
+    phone_number = models.CharField(max_length=20, unique=True, verbose_name='تلفن همراه')
+    parent_email = models.EmailField(verbose_name='ایمیل والد')
+
+    def __str__(self):
+        return self.email or self.username
