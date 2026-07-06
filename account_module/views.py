@@ -1,8 +1,9 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from .models import CustomUser
 
 
@@ -26,11 +27,41 @@ class RegisterView(View):
             )
             user.set_password(register_form.cleaned_data['password'])
             user.save()
-            return redirect(reverse('login_page'))
+            return redirect(reverse('home_page'))
         context = {
             'register_form': register_form
         }
-        return render(request, 'account_module/register.html', context)
+        return render(request, 'account_module/register.html', context,)
 
 
+class LoginView(View):
+    def get(self, request):
+        login_form = LoginForm()
+        context = {
+            'login_form': login_form
+        }
+        return render(request, 'account_module/login.html', context)
 
+    def post(self, request):
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+
+            email = login_form.cleaned_data['email']
+            password = login_form.cleaned_data['password']
+
+            user = CustomUser.objects.filter(email__iexact=email).first()
+
+            if user is None:
+                login_form.add_error(None, 'کاربر با این مشخصات وجود ندارد.')
+            else:
+                is_password_correct = user.check_password(password)
+                if is_password_correct:
+                    login(request,user)
+                    return redirect(reverse('register_page'))
+                else:
+                    login_form.add_error(None,'ایمیل یا رمزعبور اشتباه وارد شده است')
+
+        context = {
+            'login_form': login_form
+        }
+        return render(request, 'account_module/login.html')

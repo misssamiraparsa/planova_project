@@ -86,3 +86,13 @@ class RegisterForm(forms.Form):
         context = self.cleaned_data['password']
         validate_password(context)
         return context
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        label='ایمیل کاربر'
+    )
+    password = forms.CharField(
+        label='رمز عبور',
+        widget=forms.PasswordInput()
+    )
+

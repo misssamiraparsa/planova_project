@@ -10,7 +10,6 @@
 <title>ثبت‌نام | برنامه‌ریز درسی</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="auth.css">
 </head>
 <body>
 <div class="bg-glow"></div>
@@ -32,7 +31,7 @@
       <button type="button" class="active" data-lang="fa">FA</button>
       <button type="button" data-lang="en">EN</button>
     </div>
-    <a href="#" class="login-link" data-fa="ورود" data-en="Log in">ورود</a>
+    <a href="{% url 'login_page' %}" class="login-link" data-fa="ورود" data-en="Log in">ورود</a>
   </div>
 </nav>
 
@@ -222,7 +221,7 @@
         </button>
       </div>
 
-      <div class="login-prompt"><span data-fa="قبلاً ثبت‌نام کردی؟" data-en="Already have an account?">قبلاً ثبت‌نام کردی؟</span> <a href="#" data-fa="وارد شو" data-en="Log in">وارد شو</a></div>
+      <div class="login-prompt"><span data-fa="قبلاً ثبت‌نام کردی؟" data-en="Already have an account?">قبلاً ثبت‌نام کردی؟</span> <a href="{% url 'login_page' %}" data-fa="وارد شو" data-en="Log in">وارد شو</a></div>
 
       <div class="footnote"><span data-fa="با ثبت‌نام،" data-en="By signing up, you agree to our">با ثبت‌نام،</span> <a href="#" data-fa="شرایط استفاده" data-en="Terms">شرایط استفاده</a> <span data-fa="و" data-en="and">و</span> <a href="#" data-fa="حریم‌خصوصی" data-en="Privacy Policy">حریم‌خصوصی</a> <span data-fa="رو می‌پذیری." data-en="">رو می‌پذیری.</span></div>
     </div>
@@ -230,6 +229,5 @@
   </div>
 </div>
 
-<script src="auth.js" defer></script>
 </body>
 </html>

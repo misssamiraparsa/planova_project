@@ -1,10 +1,207 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'account_module/css/styles.css' %}">
+<script src="{% static 'account_module/js/login.js' %}" defer></script>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>سلام تونستی لاگین شی</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود | برنامه‌ریز درسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="bg-glow"></div>
+<div class="grain"></div>
+
+<nav class="navbar">
+  <div class="brand">
+    <div class="mark">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M4 18.5V6.8c0-.9.6-1.6 1.5-1.8 2-.5 5.2-1 6.5-1s4.5.5 6.5 1c.9.2 1.5.9 1.5 1.8v11.7" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M4 18.5c0-.7.5-1.2 1.2-1.3 1.9-.4 4.6-.7 6.8-.7s4.9.3 6.8.7c.7.1 1.2.6 1.2 1.3" stroke="#fff" stroke-width="1.7" stroke-linecap="round"></path>
+        <path d="M9 9.3l2 2 3.5-3.8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <span class="name" data-fa="مسیر" data-en="Masir">مسیر</span>
+  </div>
+  <div class="nav-actions">
+    <div class="lang-switch" role="group" aria-label="زبان">
+      <button type="button" class="active" data-lang="fa">FA</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <a href="{% url 'register_page' %}" class="login-link" data-fa="ثبت‌نام" data-en="Sign up">ثبت‌نام</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- LEFT: gamified signature -->
+    <div class="glass hero">
+      <div class="hero-top">
+        <div class="eyebrow" data-fa="برنامه‌ریز درسی هوشمند" data-en="Smart Study Planner">برنامه‌ریز درسی هوشمند</div>
+        <h1 data-fa-html="خوش برگشتی،<br><span class=&quot;grad&quot;>استریکتو رو نشکون.</span>" data-en-html="Welcome back,<br><span class=&quot;grad&quot;>don't break your streak.</span>">خوش برگشتی،<br><span class="grad">استریکتو رو نشکون.</span></h1>
+        <p class="lead" data-fa="برنامه امشبت آماده‌ست. وارد شو، گزارش‌کارت رو ثبت کن و امتیازاتو جمع کن." data-en="Tonight's plan is ready. Log in, submit your report, and keep earning points.">برنامه امشبت آماده‌ست. وارد شو، گزارش‌کارت رو ثبت کن و امتیازاتو جمع کن.</p>
+
+        <div class="level-row">
+          <div class="badge"><span class="lv">۴</span> <span data-fa="سطح چهارم" data-en="Level 4">سطح چهارم</span></div>
+          <div class="streak">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2c1 3-2 4-2 7a4 4 0 0 0 8 0c0-1-.5-2-.5-2 2 1 3.5 3.5 3.5 6a7 7 0 1 1-14 0c0-4 3-6 5-11z" fill="#D9639D"></path></svg>
+            <span data-fa="۱۲ روز متوالی" data-en="12-day streak">۱۲ روز متوالی</span>
+          </div>
+        </div>
+
+        <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+        <div class="xp-label"><span data-fa="۲۴۰ XP" data-en="240 XP">۲۴۰ XP</span><span data-fa="تا سطح بعد ۶۰ XP مونده" data-en="60 XP to next level">تا سطح بعد ۶۰ XP مونده</span></div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="plan-card" aria-hidden="true">
+          <div class="title"><span data-fa="برنامه امروز" data-en="Today's plan">برنامه امروز</span> <span class="date">SAT · TIR 14</span></div>
+
+          <div class="item" data-t="0">
+            <div class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5 8 14.5 16 5.5"></path></svg></div>
+            <div class="label" data-fa="ریاضی — فصل ۳ (اختصاصی)" data-en="Math — Ch.3 (core)">ریاضی — فصل ۳ (اختصاصی)</div>
+            <div class="tag">۰۷:۳۰</div>
+            <div class="fly-xp">+15</div>
+          </div>
+          <div class="item" data-t="1">
+            <div class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5 8 14.5 16 5.5"></path></svg></div>
+            <div class="label" data-fa="زبان عمومی — ۱۰ لغت" data-en="English — 10 words">زبان عمومی — ۱۰ لغت</div>
+            <div class="tag">۰۸:۴۵</div>
+            <div class="fly-xp">+10</div>
+          </div>
+          <div class="item" data-t="2">
+            <div class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5 8 14.5 16 5.5"></path></svg></div>
+            <div class="label" data-fa="شیمی — فصل ۲ + ۱۵ تست" data-en="Chemistry — Ch.2 + 15 Qs">شیمی — فصل ۲ + ۱۵ تست</div>
+            <div class="tag">۰۹:۳۰</div>
+            <div class="fly-xp">+20</div>
+          </div>
+        </div>
+
+        <div class="stage-bottom">
+          <div class="stat"><b>۲۸</b><span data-fa="روز پیاپی گزارش‌شده" data-en="days reported">روز پیاپی گزارش‌شده</span></div>
+          <div class="stat"><b>۶۴٪</b><span data-fa="پیشرفت برنامه این ماه" data-en="progress this month">پیشرفت برنامه این ماه</span></div>
+          <div class="stat"><b>۱۲۴۰</b><span data-fa="امتیاز کل" data-en="total points">امتیاز کل</span></div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 220 130" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="bookGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#D9639D"></stop>
+                <stop offset="1" stop-color="#D81F72"></stop>
+              </linearGradient>
+              <radialGradient id="artGlow" cx="50%" cy="45%" r="60%">
+                <stop offset="0" stop-color="#D81F72" stop-opacity="0.35"></stop>
+                <stop offset="1" stop-color="#D81F72" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+            <ellipse cx="110" cy="70" rx="95" ry="50" fill="url(#artGlow)"></ellipse>
+            <path d="M18 108 C 55 100, 70 78, 95 84 S 140 60, 160 40 S 190 24, 202 14" stroke="#3A4470" stroke-width="2" stroke-dasharray="4 6" fill="none" stroke-linecap="round"></path>
+            <g transform="translate(58,72)">
+              <path d="M0 6 C 16 -6, 36 -6, 46 4 L46 34 C 36 26, 16 26, 0 36 Z" fill="#131A38" stroke="#3A4470" stroke-width="1.4"></path>
+              <path d="M46 4 C 56 -6, 76 -6, 92 6 L92 36 C 76 26, 56 26, 46 34 Z" fill="url(#bookGrad)" stroke="#D81F72" stroke-width="1.4"></path>
+              <path d="M10 8 L34 4 M10 14 L34 10 M10 20 L30 17" stroke="#5b6690" stroke-width="1.3" stroke-linecap="round"></path>
+              <path d="M58 8 L80 4 M58 14 L80 10 M58 20 L76 17" stroke="rgba(255,255,255,0.55)" stroke-width="1.3" stroke-linecap="round"></path>
+            </g>
+            <g transform="translate(100,34)">
+              <line x1="0" y1="0" x2="0" y2="30" stroke="#E8A8C7" stroke-width="2" stroke-linecap="round"></line>
+              <path d="M0 0 C10 -2, 16 4, 24 2 C 18 8, 18 12, 24 16 C 14 18, 8 12, 0 14 Z" fill="#D9639D"></path>
+            </g>
+            <g fill="#E8A8C7">
+              <path class="spark spark-a" d="M182 52 l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"></path>
+              <path class="spark spark-b" d="M40 40 l1.8 4.4 4.4 1.8-4.4 1.8-1.8 4.4-1.8-4.4-4.4-1.8 4.4-1.8z"></path>
+              <circle class="spark spark-c" cx="160" cy="94" r="2.4"></circle>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: login form -->
+    <div class="glass panel">
+      <div class="welcome-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 18.5V6.8c0-.9.6-1.6 1.5-1.8 2-.5 5.2-1 6.5-1s4.5.5 6.5 1c.9.2 1.5.9 1.5 1.8v11.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 9.3l2 2 3.5-3.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span data-fa="خوش برگشتی" data-en="Welcome back">خوش برگشتی</span>
+      </div>
+
+      <h2 data-fa="وارد حسابت شو" data-en="Log in to your account">وارد حسابت شو</h2>
+      <p class="sub" data-fa="ایمیل و رمز عبورت رو وارد کن تا برنامه امشب و گزارش‌کارت رو ببینی." data-en="Enter your email and password to see tonight's plan and your report.">ایمیل و رمز عبورت رو وارد کن تا برنامه امشب و گزارش‌کارت رو ببینی.</p>
+
+      <form id="loginForm" novalidate method="post" action="{% url 'login_page' %}">
+      {% csrf_token %}
+
+        <div class="field">
+          <label for="{{ login_form.email.id_for_label }}" data-fa="ایمیل" data-en="Email">ایمیل</label>
+          <input id="{{ login_form.email.id_for_label }}" name="{{ login_form.email.html_name }}" value="{{ login_form.email.value|default:'' }}"
+                 type="email" placeholder="you@example.com" required autocomplete="email">
+
+             {% for error in login_form.email.errors %}
+               <p class="error-text">{{ error }}</p>
+             {% endfor %}
+        </div>
+
+        <div class="field">
+          <label for="{{ login_form.password.id_for_label }}" data-fa="رمز عبور" data-en="Password">رمز عبور</label>
+          <div class="pw-wrap">
+            <input id="{{ login_form.password.id_for_label }}" name="{{ login_form.password.html_name }}" value="{{ login_form.password.value|default:'' }}"
+                   type="password" placeholder="رمز عبورت رو وارد کن" data-fa-ph="رمز عبورت رو وارد کن" data-en-ph="Enter your password"
+                   required autocomplete="current-password">
+            <button type="button" class="pw-toggle" id="pwToggle" aria-label="نمایش رمز عبور">
+              <svg id="pwIconShow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"></circle></svg>
+              <svg id="pwIconHide" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M9.88 5.15A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a13.7 13.7 0 0 1-2.9 3.66M6.1 6.1C3.87 7.65 2 10 2 12s3.5 7 10 7a10.9 10.9 0 0 0 3.1-.45" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+              {% for error in login_form.password.errors %}
+               <p class="error-text">{{ error }}</p>
+             {% endfor %}
+          </div>
+        {% if login_form.non_field_errors %}
+    <div class="form-global-errors">
+      {% for error in login_form.non_field_errors %}
+        <p class="error-text global-error" style="color: #d9639d; margin-bottom: 15px;">{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+        </div>
+
+        <div class="remember-row">
+          <label class="checkbox">
+            <input type="checkbox" id="remember" name="remember">
+            <span class="box-ui"><svg viewBox="0 0 20 20"><path d="M4 10.5 8 14.5 16 5.5"></path></svg></span>
+            <span data-fa="من رو به خاطر بسپار" data-en="Remember me">من رو به خاطر بسپار</span>
+          </label>
+          <a href="#" class="forgot" data-fa="رمز عبورو فراموش کردی؟" data-en="Forgot password?">رمز عبورو فراموش کردی؟</a>
+        </div>
+
+        <button type="submit" class="submit">
+          <span data-fa="ورود به حساب" data-en="Log in">ورود به حساب</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+      </form>
+
+      <div class="divider"><span data-fa="یا ادامه با" data-en="or continue with">یا ادامه با</span></div>
+
+      <div class="social-row">
+        <button type="button" class="social-btn" id="googleBtn">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.87 2.7-6.62z"></path><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.98v2.33A9 9 0 0 0 9 18z"></path><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17.28-1.7V4.97H.98A9 9 0 0 0 0 9c0 1.45.35 2.83.98 4.03l2.97-2.33z"></path><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .98 4.97l2.97 2.33C4.66 5.17 6.65 3.58 9 3.58z"></path></svg>
+          <span data-fa="ورود با گوگل" data-en="Google">ورود با گوگل</span>
+        </button>
+        <button type="button" class="social-btn" id="facebookBtn">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#1877F2" d="M18 9a9 9 0 1 0-10.4 8.9v-6.3H5.3V9h2.3V7c0-2.3 1.36-3.56 3.44-3.56.7 0 1.4.06 2.1.2v2.3h-1.2c-1.14 0-1.5.7-1.5 1.42V9h2.56l-.4 2.6h-2.16v6.3A9 9 0 0 0 18 9z"></path></svg>
+          <span data-fa="ورود با فیسبوک" data-en="Facebook">ورود با فیسبوک</span>
+        </button>
+      </div>
+
+      <div class="login-prompt"><span data-fa="هنوز حساب نساختی؟" data-en="Don't have an account yet?">هنوز حساب نساختی؟</span> <a href="{% url 'register_page' %}" data-fa="ثبت‌نام کن" data-en="Sign up">ثبت‌نام کن</a></div>
+
+      <div class="footnote"><span data-fa="با ورود،" data-en="By logging in, you agree to our">با ورود،</span> <a href="#" data-fa="شرایط استفاده" data-en="Terms">شرایط استفاده</a> <span data-fa="و" data-en="and">و</span> <a href="#" data-fa="حریم‌خصوصی" data-en="Privacy Policy">حریم‌خصوصی</a> <span data-fa="رو می‌پذیری." data-en="">رو می‌پذیری.</span></div>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>
