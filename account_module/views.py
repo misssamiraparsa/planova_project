@@ -56,7 +56,7 @@ class LoginView(View):
             else:
                 is_password_correct = user.check_password(password)
                 if is_password_correct:
-                    login(request,user)
+                    login(request,user,backend='django.contrib.auth.backends.ModelBackend')
                     return redirect(reverse('register_page'))
                 else:
                     login_form.add_error(None,'ایمیل یا رمزعبور اشتباه وارد شده است')

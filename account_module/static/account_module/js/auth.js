@@ -31,9 +31,6 @@ const items = document.querySelectorAll('.plan-card .item');
   }
 
 
-  document.getElementById('googleBtn').addEventListener('click', () => alert('اتصال به گوگل بعداً وصل می‌شود.'));
-  document.getElementById('facebookBtn').addEventListener('click', () => alert('اتصال به فیسبوک بعداً وصل می‌شود.'));
-
   // ---- password show/hide ----
   document.getElementById('pwToggle').addEventListener('click', function(){
     const pw = document.getElementById('password');

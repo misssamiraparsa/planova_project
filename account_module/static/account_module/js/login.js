@@ -46,12 +46,7 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 // ==========================================
 // 2. SOCIAL BUTTONS HANDLERS
 // ==========================================
-const googleBtn = document.getElementById('googleBtn');
-if (googleBtn) {
-  googleBtn.addEventListener('click', () =>
-    alert('اتصال به گوگل بعداً وصل می‌شود.')
-  );
-}
+
 
 const facebookBtn = document.getElementById('facebookBtn');
 if (facebookBtn) {

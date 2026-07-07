@@ -5,7 +5,7 @@ from django.db import models
 class CustomUser(AbstractUser):
     fullname = models.CharField(verbose_name='نام و نام خانوادگی', null=True, blank=True)
     email = models.EmailField(unique=True, verbose_name='ایمیل کاربر')
-    phone_number = models.CharField(max_length=20, unique=True, verbose_name='تلفن همراه')
+    phone_number = models.CharField(max_length=20,null=True,blank=True, verbose_name='تلفن همراه')
     parent_email = models.EmailField(verbose_name='ایمیل والد')
 
 
