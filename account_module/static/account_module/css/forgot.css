@@ -1,0 +1,173 @@
+:root {
+  --navy-950: #080B18;
+  --navy-900: #0D1128;
+  --navy-800: #131A38;
+  --navy-700: #1B2348;
+  --line: rgba(255,255,255,0.08);
+  --pink-600: #D81F72;
+  --pink-500: #DD3B84;
+  --pink-400: #D9639D;
+  --pink-300: #E58AB5;
+  --pink-200: #E8A8C7;
+  --ice: #F3F5FF;
+  --mist: #8B93B8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: var(--navy-950);
+  color: var(--ice);
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* افکت‌های پس‌زمینه */
+.bg-glow {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(600px 500px at 82% -8%, rgba(216,31,114,0.28), transparent 60%),
+    radial-gradient(500px 420px at -5% 100%, rgba(221,59,132,0.16), transparent 60%),
+    radial-gradient(900px 700px at 50% 50%, rgba(27,35,72,0.6), transparent 70%);
+}
+
+.grain {
+  position: fixed; inset: 0; z-index: 0; opacity: 0.035; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* هدر سایت */
+.navbar {
+  position: relative; z-index: 2;
+  max-width: 1040px; margin: 0 auto; width: 100%;
+  padding: 16px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand .mark {
+  width: 30px; height: 30px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--pink-600), var(--pink-400));
+  box-shadow: 0 6px 18px -4px rgba(221,59,132,0.6);
+}
+.brand .name { font-weight: 800; font-size: 14.5px; color: var(--ice); }
+
+/* ساختار کارت گلس‌مورفیسم */
+.auth-wrap {
+  position: relative; z-index: 1;
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 28px 48px;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  padding: 32px 30px;
+  width: 100%;
+  max-width: 440px;
+}
+
+h2 { font-size: 20px; font-weight: 900; margin-bottom: 8px; text-align: center; }
+.sub { color: var(--mist); font-size: 12.5px; line-height: 1.8; margin-bottom: 24px; text-align: center; }
+
+/* کامپوننت‌های فرم */
+.field-group { margin-bottom: 20px; }
+.field-group > label { display: block; font-size: 13px; font-weight: 700; color: var(--ice); margin-bottom: 10px; }
+
+.form-control {
+  background: rgba(255,255,255,0.04);
+  border: 1.6px solid var(--line); color: var(--ice);
+  padding: 12px 14px; border-radius: 10px;
+  font-family: 'Vazirmatn', sans-serif; font-size: 13px;
+  outline: none; transition: all 0.2s ease;
+  width: 100%;
+}
+.form-control:focus { border-color: var(--pink-500); background: rgba(255,255,255,0.06); }
+
+/* خطاهای فرم */
+.error-block {
+  background: rgba(216,31,114,0.1);
+  border: 1px solid rgba(216,31,114,0.3);
+  padding: 10px 14px; border-radius: 10px;
+  color: var(--pink-300); font-size: 12px; margin-bottom: 18px;
+  line-height: 1.6;
+}
+.field-error {
+  color: var(--pink-300); font-size: 11px; margin-top: 6px;
+}
+
+/* استایل اختصاصی بخش کپچا */
+.captcha-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.captcha-input {
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.captcha-img-box {
+  background: rgba(255,255,255,0.02);
+  border: 1.6px dashed var(--line);
+  border-radius: 10px;
+  height: 47.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.captcha-img-box img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.captcha-placeholder {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: var(--pink-300);
+  font-size: 14px;
+}
+
+/* دکمه ارسال */
+.submit {
+  margin-top: 10px; width: 100%;
+  background: linear-gradient(90deg, var(--pink-600), var(--pink-400));
+  color: #fff; border: none; border-radius: 12px; padding: 14px;
+  font-family: 'Vazirmatn', sans-serif; font-size: 14.5px; font-weight: 800;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 10px 24px -8px rgba(221,59,132,0.55);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.submit:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(221,59,132,0.7); }
+.submit:active { transform: translateY(0); }
+
+/* فوتر کارت */
+.auth-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mist);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.back-link:hover { color: var(--pink-300); }
+.back-link svg { transform: scaleX(-1); }

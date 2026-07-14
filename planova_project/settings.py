@@ -60,7 +60,7 @@ ROOT_URLCONF = 'planova_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,3 +135,10 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = 'register_page'
 ACCOUNT_SIGNUP_REDIRECT_URL = 'login_page'
 SOCIALACCOUNT_LOGIN_ON_GET = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'misssamiraparsa@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'misssamiraparsa@gmail.com'
+EMAIL_HOST_PASSWORD = 'hgjzmjbcraoejxut'
