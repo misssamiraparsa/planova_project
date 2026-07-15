@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'captcha',
     'account_module'
 ]
 
@@ -142,3 +143,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'misssamiraparsa@gmail.com'
 EMAIL_HOST_PASSWORD = 'hgjzmjbcraoejxut'
+
+CAPTCHA_LENGTH = 7
+CAPTCHA_IMAGE_SIZE = (120, 45)
+CAPTCHA_FONT_SIZE = 24
+CAPTCHA_TIMEOUT = 5
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator, MinLengthValidator, EmailValidator, MaxLengthValidator
-
+from captcha.fields import CaptchaField
 from .models import CustomUser
 
 
@@ -109,6 +109,10 @@ class ForgotPassForm(forms.Form):
         ]
     )
 
+    captcha = CaptchaField(
+        label="کد امنیتی ",
+        error_messages={'invalid': 'کد امنیتی وارد شده صحیح نیست.'}
+    )
 
 class ResetPassForm(forms.Form):
     password = forms.CharField(
