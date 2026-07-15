@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from .utils import send_email
-from .forms import RegisterForm, LoginForm, ForgotPassForm
+from .forms import RegisterForm, LoginForm, ForgotPassForm, ResetPassForm
 from .models import CustomUser
 
 
@@ -89,8 +89,8 @@ class ForgotPassView(View):
             user: CustomUser = CustomUser.objects.filter(email__iexact=user_email).first()
             if user is not None:
                 token = PasswordResetTokenGenerator().make_token(user)
-                link = f"http://127.0.0.1:8000/reset-password/{user.id}/{token}/"
-                send_email('بازیابی کلمه عبور', user.email, {'user': user, 'link':link}, 'emails/forgot_password.html')
+                link = f"http://127.0.0.1:8000/resetPass/{user.id}/{token}/"
+                send_email('بازیابی کلمه عبور', user.email, {'user': user, 'link': link}, 'emails/forgot_password.html')
                 messages.success(request, 'لینک بازیابی رمز عبور با موفقیت به ایمیل شما ارسال شد.')
                 return redirect('register_page')
         messages.error(request, 'لطفاً ایمیل معتبری وارد کنید.')
@@ -98,4 +98,38 @@ class ForgotPassView(View):
             'forget_pass_form': forget_pass_form
         }
         return render(request, 'account_module/forgot_password.html', context)
+
+
+class ResetPassView(View):
+    def get(self, request, token, user_id):
+        user: CustomUser = CustomUser.objects.filter(id=user_id).first()
+        token_generator = PasswordResetTokenGenerator()
+        if user is None or not token_generator.check_token(user, token):
+            messages.error(request, 'لینک بازیابی رمزعبور معتبر نیست ویا منقضی شده است')
+            return redirect('login_page')
+
+        reset_form = ResetPassForm()
+        context = {
+            reset_form: 'reset_form'
+        }
+        return render(request, 'account_module/reset_password.html', context)
+
+    def post(self, request, token, user_id):
+        user: CustomUser = CustomUser.objects.filter(id=user_id).first()
+        token_generator = PasswordResetTokenGenerator()
+        if user is None or not token_generator.check_token(user, token):
+            messages.error(request, 'عملیات نامعتبر است دوباره تلاش کنید')
+            return redirect('login_page')
+
+        reset_form = ResetPassForm(request.POST)
+        if reset_form.is_valid():
+            new_password = reset_form.cleaned_data.get('password')
+            user.set_password(new_password)
+            user.save()
+            return redirect('login_page')
+        context = {
+            'reset_form' : reset_form
+        }
+
+        return render(request,'account_module/reset_password.html',context)
 

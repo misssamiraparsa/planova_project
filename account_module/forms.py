@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator, MinLengthValidator, EmailValidator, MaxLengthValidator
 
 from .models import CustomUser
@@ -87,6 +88,7 @@ class RegisterForm(forms.Form):
         validate_password(context)
         return context
 
+
 class LoginForm(forms.Form):
     email = forms.EmailField(
         label='ایمیل کاربر'
@@ -95,6 +97,7 @@ class LoginForm(forms.Form):
         label='رمز عبور',
         widget=forms.PasswordInput()
     )
+
 
 class ForgotPassForm(forms.Form):
     email = forms.EmailField(
@@ -105,3 +108,28 @@ class ForgotPassForm(forms.Form):
             EmailValidator
         ]
     )
+
+
+class ResetPassForm(forms.Form):
+    password = forms.CharField(
+        label='رمز عبور',
+        widget=forms.PasswordInput(),
+        validators=[
+            MinLengthValidator(8)
+        ]
+    )
+    confirm_password = forms.CharField(
+        label='تکرار رمز عبور',
+        widget=forms.PasswordInput(),
+        validators=[
+            MinLengthValidator(8)
+        ]
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+        if password and confirm_password and password != confirm_password:
+            raise ValidationError('رمز عبور و تکرار آن با هم مطابقت ندارند.')
+        return cleaned_data

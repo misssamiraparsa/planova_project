@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --navy-950: #080B18;
+  --navy-900: #0D1128;
+  --navy-800: #131A38;
+  --line: rgba(255,255,255,0.08);
+  --pink-600: #D81F72;
+  --pink-500: #DD3B84;
+  --pink-400: #D9639D;
+  --ice: #F3F5FF;
+  --mist: #8B93B8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: var(--navy-950);
+  color: var(--ice);
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-glow {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(600px 500px at 82% -8%, rgba(216,31,114,0.28), transparent 60%),
+    radial-gradient(500px 420px at -5% 100%, rgba(221,59,132,0.16), transparent 60%),
+    radial-gradient(900px 700px at 50% 50%, rgba(27,35,72,0.6), transparent 70%);
+}
+
+.grain {
+  position: fixed; inset: 0; z-index: 0; opacity: 0.035; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.navbar {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 1040px; margin: 0 auto;
+  padding: 24px 28px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand .mark {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--pink-600), var(--pink-400));
+  box-shadow: 0 6px 18px -4px rgba(221,59,132,0.6);
+}
+.brand .name { font-weight: 800; font-size: 16px; color: var(--ice); }
+
+.wrap {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 400px;
+  margin: 40px auto; padding: 0 20px;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  padding: 32px 28px;
+}
+
+h2 { font-size: 20px; font-weight: 900; margin-bottom: 8px; text-align: center; }
+.sub { color: var(--mist); font-size: 13px; line-height: 1.6; margin-bottom: 28px; text-align: center; }
+
+.field-group { margin-bottom: 20px; }
+.field-group label {
+  display: block; font-size: 13px; font-weight: 700;
+  color: var(--ice); margin-bottom: 10px;
+}
+
+.form-control {
+  background: rgba(255,255,255,0.04);
+  border: 1.6px solid var(--line); color: var(--ice);
+  padding: 12px 14px; border-radius: 12px;
+  font-family: 'Vazirmatn', sans-serif; font-size: 13.5px;
+  outline: none; transition: all 0.2s ease;
+  width: 100%; direction: ltr; text-align: left;
+}
+
+.form-control:focus { border-color: var(--pink-500); background: rgba(255,255,255,0.06); }
+
+.error-msg {
+  color: #ff4d4d; background: rgba(255, 77, 77, 0.1);
+  border: 1px dashed #ff4d4d; padding: 10px;
+  border-radius: 8px; font-size: 12px;
+  margin-top: -5px; margin-bottom: 15px;
+  display: none; text-align: center;
+}
+
+.submit {
+  margin-top: 10px; width: 100%;
+  background: linear-gradient(90deg, var(--pink-600), var(--pink-400));
+  color: #fff; border: none; border-radius: 12px; padding: 14px;
+  font-family: 'Vazirmatn', sans-serif; font-size: 15px; font-weight: 800;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 10px 24px -8px rgba(221,59,132,0.55);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.submit:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(221,59,132,0.7); }
+.submit:active { transform: translateY(0); }
